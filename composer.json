@@ -1,8 +1,0 @@
-{
-    "require": {
-        "intervention/image-laravel": "^4.1"
-    },
-    "require-dev": {
-        "barryvdh/laravel-ide-helper": "^3.7"
-    }
-}
