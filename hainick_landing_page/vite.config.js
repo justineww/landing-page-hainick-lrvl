@@ -1,36 +1,18 @@
-import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
-import { bunny } from "laravel-vite-plugin/fonts";
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import react from '@vitejs/plugin-react'; // Assuming you are using React based on previous logs
 
 export default defineConfig({
+
+    envDir: '../',
     plugins: [
         laravel({
             input: [
-                "resources/css/app.css",
-                "resources/js/src/index.jsx", // Entry point React project kamu
+                'resources/css/app.css', 
+                'resources/js/app.jsx' // Note: Change this to .js or .tsx if your project uses those extensions
             ],
             refresh: true,
-            fonts: [
-                bunny("Instrument Sans", {
-                    weights: [400, 500, 600],
-                }),
-            ],
         }),
-        react(), // Plugin React aktif
-        tailwindcss(),
+        react(),
     ],
-    // Mencegah error jika ada file .js yang berisi sintaks JSX
-    esbuild: {
-        loader: "jsx",
-        include: /resources\/js\/.*\.jsx?$/,
-    },
-    server: {
-        host: "127.0.0.1", // Paksa IPv4 agar tidak bentrok dengan [::1]
-        port: 5173,
-        watch: {
-            ignored: ["**/storage/framework/views/**"],
-        },
-    },
 });
