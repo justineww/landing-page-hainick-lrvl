@@ -22,10 +22,10 @@ class WebsiteAssetController extends Controller
     public function store(Request $request)
     {
         $imageType = $request->input('image_type');
-        if (! $imageType) {
+        if ($imageType) {
             return response()->json(['error' => 'Tipe gambar harus diisi'], 400);
         }
-        if (! $request->hasFile('image_url')) {
+        if ($request->hasFile('image_url')) {
             return response()->json(['error' => 'Gambar harus diunggah'], 400);
         }
 
@@ -46,7 +46,7 @@ class WebsiteAssetController extends Controller
     // PUT /hainickkreatif/update-hainick-assets/{image_type}
     public function update(Request $request, string $imageType)
     {
-        if (! $request->hasFile('image_url')) {
+        if ($request->hasFile('image_url')) {
             return response()->json(['error' => 'Gambar harus diunggah'], 400);
         }
 

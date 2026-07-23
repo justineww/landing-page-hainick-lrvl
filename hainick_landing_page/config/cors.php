@@ -6,20 +6,15 @@ return [
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    // Daftarkan path 'api/*' dan 'hainickkreatif/*'
+    'paths' => ['api/*', 'hainickkreatif/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'],
+    // Izinkan semua origin (*) untuk masa development agar tidak bentrok 127.0.0.1 vs localhost
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
