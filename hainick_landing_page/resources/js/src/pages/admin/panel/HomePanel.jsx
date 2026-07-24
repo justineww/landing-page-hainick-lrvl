@@ -47,14 +47,20 @@ const HomePanel = () => {
 
         const formData = new FormData();
         formData.append("image_type", "hero_banner");
-        formData.append("image", file);
+        formData.append("image_url", file);
 
         try {
             const url = heroUrl
                 ? `${API_URL}/update-hainick-assets/hero_banner`
                 : `${API_URL}/create-hainick-assets`;
 
-            const method = heroUrl ? "PUT" : "POST";
+            // Always use POST for file uploads
+            const method = "POST"; 
+
+            // If updating, tell Laravel to spoof the PUT method
+            if (heroUrl) {
+                formData.append("_method", "PUT");
+            }
 
             const res = await fetch(url, { method, body: formData });
 

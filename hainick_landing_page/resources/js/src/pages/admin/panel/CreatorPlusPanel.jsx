@@ -207,7 +207,7 @@ const TalentModal = ({ mode, talent, onClose, onSaved }) => {
     fd.append("url_x", form.url_x || "");
     // Gabungkan array roles menjadi string dipisah koma
     fd.append("roles", selectedRoles.join(", "));
-    if (imageFile) fd.append("image", imageFile);
+    if (imageFile) fd.append("profile_image", imageFile);
 
     try {
       const url = isEdit

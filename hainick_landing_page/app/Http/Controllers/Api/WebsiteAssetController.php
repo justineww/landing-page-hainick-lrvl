@@ -25,7 +25,7 @@ class WebsiteAssetController extends Controller
         if (! $imageType) {
             return response()->json(['error' => 'Tipe gambar harus diisi'], 400);
         }
-        if ($request->hasFile('image_url')) {
+        if (! $request->hasFile('image_url')) {
             return response()->json(['error' => 'Gambar harus diunggah'], 400);
         }
 

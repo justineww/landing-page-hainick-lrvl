@@ -34,6 +34,7 @@ class CreatorController extends Controller
             $urlTiktok = $request->input('url_tiktok', '');
             $urlX = $request->input('url_x', '');
 
+
             $image = null;
             if ($request->hasFile('profile_image')) {
                 $image = $this->convertToWebp($request->file('profile_image'));

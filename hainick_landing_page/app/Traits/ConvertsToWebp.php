@@ -21,6 +21,8 @@ trait ConvertsToWebp
 {
     protected function convertToWebp(UploadedFile $file): string
     {
+        ini_set('memory_limit', '512M');
+        
         $filename = time() . '_' . uniqid() . '.webp';
 
         // Encode directly from the uploaded file's temp path — no need to
