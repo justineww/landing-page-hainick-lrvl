@@ -87,7 +87,7 @@ const TalentModal = ({ mode, talent, onClose, onSaved }) => {
       // row official_talent_desc) atau memperbarui foto yang sudah ada.
       if (!isEdit) {
         const fd = new FormData();
-        fd.append("image", imageFile);
+        fd.append("image_url", imageFile);
         const res = await fetch(`${API_URL}/create-official-talent`, {
           method: "POST",
           body: fd,

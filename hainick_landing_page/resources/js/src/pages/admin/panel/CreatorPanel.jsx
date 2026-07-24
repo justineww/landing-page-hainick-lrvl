@@ -66,7 +66,7 @@ function PhotoCardItem({ card, onUpdated }) {
     setUploading(true);
     setMsg(null);
     const formData = new FormData();
-    formData.append("image", pendingFile);
+    formData.append("image_url", pendingFile);
     try {
       const res = await fetch(
         `${API_URL}/api/update-creators-photocard/${card.id}`,
