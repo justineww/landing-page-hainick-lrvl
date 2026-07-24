@@ -10,12 +10,33 @@ const HomeSection = () => {
     useEffect(() => {
         fetch(`${API_URL}/hainick-assets`)
             .then((res) => res.json())
-            .then((data) => {
-                const hero = data.find(
+            .then((result) => {
+                // 1. Antisipasi jika respon Laravel berbentuk array langsung atau objek { data: [...] }
+                const assets = Array.isArray(result)
+                    ? result
+                    : result?.data || [];
+
+                // Cek data API di Console Browser (F12)
+                console.log("🔍 Data dari API:", assets);
+
+                const hero = assets.find(
                     (item) => item.image_type === "hero_banner",
                 );
+
+                console.log("🔍 Item Hero Banner:", hero);
+
                 if (hero?.image_url) {
-                    setHeroImage(`${BASE_URL}${hero.image_url}`);
+                    // 2. Bersihkan slash agar URL tidak bertumpuk (contoh: http://localhost:8000//uploads)
+                    const cleanBase = (BASE_URL || "").replace(/\/+$/, "");
+                    const cleanPath = hero.image_url.replace(/^\/+/, "");
+
+                    // 3. Jika image_url sudah berupa URL lengkap (https://...), gunakan langsung
+                    const fullUrl = hero.image_url.startsWith("http")
+                        ? hero.image_url
+                        : `${cleanBase}/${cleanPath}`;
+
+                    console.log("🚀 URL Gambar Akhir:", fullUrl);
+                    setHeroImage(fullUrl);
                 }
             })
             .catch((err) => console.error("Gagal memuat hero banner:", err));
@@ -119,6 +140,14 @@ const HomeSection = () => {
                         className="hero-img"
                         src={heroImage}
                         alt="Hainick Creative Team"
+                        onError={(e) => {
+                            console.error(
+                                "❌ Gagal memuat gambar dari URL:",
+                                heroImage,
+                            );
+                            // Kembalikan ke fallback jika link gambar rusak/404
+                            e.target.src = FALLBACK_IMG;
+                        }}
                     />
                     <div className="hero-overlay" />
                     <div className="hero-text"></div>
